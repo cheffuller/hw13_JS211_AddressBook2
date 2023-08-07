@@ -1,0 +1,27 @@
+figure {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 20px; /* adjust as needed */
+    text-align: center;
+}
+
+figure img {
+    vertical-align: top;
+    width: 250px;
+}
+
+figure figcaption {
+    border-top: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+button,
+ul {
+    margin: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
