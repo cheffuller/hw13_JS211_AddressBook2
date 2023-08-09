@@ -20,10 +20,8 @@ const displayData = (user) => {
   const caption = document.createElement("figcaption");
   const name = user.name.title + " " + user.name.first + " " + user.name.last;
   caption.innerHTML = name;
-  displayWindow.appendChild(figure);
-  figure.appendChild(img);
-  figure.appendChild(caption);
-  figure.appendChild(createButton(user, figure));
+  displayWindow.append(figure);
+  figure.append(img, caption, createButton(user, figure));
 };
 
 // function that builds the button and all of the "more info" elements to be displayed
@@ -34,9 +32,7 @@ const createButton = (user, figure) => {
   const moreInfo = document.createElement("ul");
   const dateOfBirth = document.createElement("li");
   const dob = new Date(user.dob.date);
-  dateOfBirth.innerHTML = `${
-    dob.getMonth() + 1
-  } / ${dob.getDate()} / ${dob.getFullYear()}`;
+  dateOfBirth.innerHTML = `${dob.getMonth() + 1} / ${dob.getDate()} / ${dob.getFullYear()}`;
   const email = document.createElement("li");
   email.innerHTML = user.email;
   const cell = document.createElement("li");
@@ -45,18 +41,14 @@ const createButton = (user, figure) => {
   addressLineOne.innerHTML = `${user.location.street.number} ${user.location.street.name}`;
   const addressLineTwo = document.createElement("li");
   addressLineTwo.innerHTML = `${user.location.state}, ${user.location.country} ${user.location.postcode}`;
-  moreInfo.appendChild(dateOfBirth);
-  moreInfo.appendChild(addressLineOne);
-  moreInfo.appendChild(addressLineTwo);
-  moreInfo.appendChild(email);
-  moreInfo.appendChild(cell);
+  moreInfo.append(dateOfBirth, addressLineOne, addressLineTwo, email, cell);
   button.addEventListener("click", function () {
     if (!this.dataset.clicked) {
       this.setAttribute("data-clicked", "true");
-      figure.appendChild(moreInfo);
+      figure.append(moreInfo);
     } else {
       this.removeAttribute("data-clicked");
-      figure.removeChild(moreInfo);
+      moreInfo.remove();
     }
   });
   return button;
